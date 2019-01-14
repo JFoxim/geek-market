@@ -24,7 +24,30 @@
 
 <div class="container">
     <h2>Список товаров</h2>
-
+    <form th:action="@{/shop/shopFilter}" th:object="${productFilter}" method="post" enctype="multipart/form-data">
+    <div class="form-row">
+        <div class="col form-group">
+            <label>Наименование</label>
+            <input th:field="*{title}" type="text" class="form-control" placeholder="">
+        </div>
+        <div class="col form-group">
+            <label>Наименование категории</label>
+            <input th:field="*{categoryTitle}" type="text" class="form-control" placeholder="">
+        </div>
+        <div class="col form-group">
+            <label>Цена минимальная</label>
+            <input th:field="*{priceMin}" type="number" class="form-control" placeholder="">
+        </div>
+        <div class="col form-group">
+            <label>Цена максимальная</label>
+            <input th:field="*{priceMax}" type="number" class="form-control" placeholder="">
+        </div>
+        <div class="col form-group">
+          <button type="button" class="btn btn-primary btn-find" th:link="${productFilter}">Искать</button>
+        </div>
+    </div>
+    </form>
+  <br>
     <table class="table">
         <thead>
         <tr class="thead-dark">
