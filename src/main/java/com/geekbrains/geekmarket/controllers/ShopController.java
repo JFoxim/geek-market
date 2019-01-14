@@ -3,6 +3,7 @@ package com.geekbrains.geekmarket.controllers;
 import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.geekbrains.geekmarket.entities.Order;
 import com.geekbrains.geekmarket.entities.Product;
+import com.geekbrains.geekmarket.entities.ProductFilter;
 import com.geekbrains.geekmarket.entities.User;
 import com.geekbrains.geekmarket.repositories.ProductRepository;
 import com.geekbrains.geekmarket.repositories.Specification.ProductSpecs;
@@ -69,6 +70,15 @@ public class ShopController {
 
     @GetMapping("/shopFilter")
     public String shopFilterPage(Model model) {
+        List<Product> productsList = productService.getAllProducts();
+        model.addAttribute("productsList", productsList);
+        ProductFilter productFilter = new ProductFilter();
+        model.addAttribute(productFilter);
+        return "shop-page-with-filter";
+    }
+
+    @GetMapping("/shopFilter/{titleFilter}/{categoryTitleFilter}/{priceMin}/{priceMax}")
+    public String processFilterPage(Model model) {
         List<Product> productsList = productService.getAllProducts();
         model.addAttribute("productsList", productsList);
         return "shop-page-with-filter";
